@@ -8,20 +8,30 @@ import java.util.List;
 
 public class ProductsByEffectivePriceRange {
 
-    public List<Product> m(BigDecimal mi, BigDecimal ma, List<Product> lis) {
-        if (mi == null) throw new IllegalArgumentException("minimum price should not be null");
-        if (ma == null) throw new IllegalArgumentException("maximum price should not be null");
-        if (lis == null) throw new IllegalArgumentException("product list should not be null");
+	public List<Product> filterProductsByEffectivePrice(BigDecimal minimumPrice, BigDecimal maximumPrice,
+			List<Product> allProducts) {
+		if (minimumPrice == null)
+			throw new IllegalArgumentException("minimum price should not be null");
+		if (maximumPrice == null)
+			throw new IllegalArgumentException("maximum price should not be null");
+		if (allProducts == null)
+			throw new IllegalArgumentException("product list should not be null");
 
-        List<Product> lisFi = new ArrayList<>();
+		List<Product> filteredProducts = new ArrayList<>();
+		
+		for (Product product : allProducts) {			
+			if(product.getDiscount() != null) {
+				if(product.applyDiscount().compareTo(minimumPrice) >= 0 && product.applyDiscount().compareTo(maximumPrice) <= 0) {
+					filteredProducts.add(product);
+				}
+			} else {
+				if(product.getPrice().compareTo(minimumPrice) >= 0 && product.getPrice().compareTo(maximumPrice) <= 0) {
+					filteredProducts.add(product);
+				}
+			}
+		}
 
-        for (Product x : lis) {
-            if ((x.getDiscount() != null ? x.getPrice().subtract(x.getDiscount()) : x.getPrice()).compareTo(mi) >= 0 && (x.getDiscount() != null ? x.getPrice().subtract(x.getDiscount()) : x.getPrice()).compareTo(ma) <= 0) {
-                lisFi.add(x);
-            }
-        }
-
-        return lisFi;
-    }
+		return filteredProducts;
+	}
 
 }

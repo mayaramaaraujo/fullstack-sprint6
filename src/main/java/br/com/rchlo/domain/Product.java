@@ -75,6 +75,7 @@ public class Product {
     public Set<Size> getAvailableSizes() {
         return availableSizes;
     }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -107,4 +108,8 @@ public class Product {
                 ", availableSizes=" + availableSizes +
                 '}';
     }
+
+	public BigDecimal applyDiscount() {
+		return this.price.subtract(this.getDiscount());
+	}
 }

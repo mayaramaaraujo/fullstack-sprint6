@@ -15,8 +15,12 @@ public class ProductColorReport {
 		ProductsByColor productByColor = new ProductsByColor();		
 		List<Color> colors = Arrays.asList(Color.values());		
 		
+		if(products == null) {
+			throw new NullPointerException("Não há lista de produtos para buscar");
+		}
+		
 		colors.forEach(c -> quantityOfProductsByColor.put(c, productByColor.filter(c, products).size()));
 		
-		return quantityOfProductsByColor;	
+		return quantityOfProductsByColor;
 	}
 }

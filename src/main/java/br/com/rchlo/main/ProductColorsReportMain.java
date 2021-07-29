@@ -21,5 +21,6 @@ public class ProductColorsReportMain {
 			System.out.println(key + ": " + productsReport.get(key));
 		}
 	}
+	
 
 }

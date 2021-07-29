@@ -14,6 +14,10 @@ public class ProductSizesReport {
 	public Map<Size, List<Product>> report(List<Product> products) {
 		List<Size> sizes = Arrays.asList(Size.values());	
 		
+		if(products == null) {
+			throw new NullPointerException("Não foi passado nenhuma lista de produtos");
+		}
+		
 		sizes.forEach(s -> {
 			List<Product> filteredProducts = products.stream().filter(p -> p.getAvailableSizes().contains(s)).toList();
 			quantityOfProductsBySize.put(s, filteredProducts);

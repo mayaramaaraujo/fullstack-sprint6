@@ -15,7 +15,7 @@ public class ProductsByColorMain {
 		
 		ProductsByColor productsByColor = new ProductsByColor();
 		List<Product> filteredProducts = productsByColor.filter(Color.WHITE, products);
-		System.out.println(filteredProducts);
+		System.out.println(filteredProducts); 
 	}
 
 }

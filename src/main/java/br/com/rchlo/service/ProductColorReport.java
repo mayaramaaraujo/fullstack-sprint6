@@ -17,6 +17,6 @@ public class ProductColorReport {
 		
 		colors.forEach(c -> quantityOfProductsByColor.put(c, productByColor.filter(c, products).size()));
 		
-		return quantityOfProductsByColor;		
+		return quantityOfProductsByColor;	
 	}
 }

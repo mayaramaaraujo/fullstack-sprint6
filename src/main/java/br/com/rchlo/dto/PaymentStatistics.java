@@ -5,11 +5,12 @@ import br.com.rchlo.domain.PaymentStatus;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 
-public class PaymentStatistics extends HashMap<PaymentStatus, Long> {
+// Princípio da Substituição de Liskov
 
-    private BigDecimal maximumAmountOfConfirmedPayment;
+public class PaymentStatistics {
+	private BigDecimal maximumAmountOfConfirmedPayment;
+	private HashMap<PaymentStatus, Long> paymentStatistics = new HashMap<PaymentStatus, Long>();
 
     public PaymentStatistics(BigDecimal maximumAmountOfConfirmedPayment) {
         this.maximumAmountOfConfirmedPayment = maximumAmountOfConfirmedPayment;
@@ -20,42 +21,16 @@ public class PaymentStatistics extends HashMap<PaymentStatus, Long> {
     }
 
     public Map<PaymentStatus, Long> getQuantityOfPaymentsByStatus() {
-        return this;
+        return paymentStatistics;
     }
 
     public void addPaymentForStatus(PaymentStatus status) {
-        Long quantity = this.get(status);
+        Long quantity = this.paymentStatistics.get(status);
         if (quantity == null) {
             quantity = 1L;
         } else {
             quantity++;
         }
-        this.put(status, quantity);
+        this.paymentStatistics.put(status, quantity);
     }
-
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean remove(Object key, Object value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean replace(PaymentStatus key, Long oldValue, Long newValue) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void putAll(Map<? extends PaymentStatus, ? extends Long> m) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Long merge(PaymentStatus key, Long value, BiFunction<? super Long, ? super Long, ? extends Long> remappingFunction) {
-        throw new UnsupportedOperationException();
-    }
-
 }

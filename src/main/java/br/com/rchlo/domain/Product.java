@@ -1,7 +1,6 @@
 package br.com.rchlo.domain;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

@@ -18,18 +18,13 @@ public class ProductsByEffectivePriceRange {
 			throw new IllegalArgumentException("product list should not be null");
 
 		List<Product> filteredProducts = new ArrayList<>();
-		
-		for (Product product : allProducts) {			
-			if(product.getDiscount() != null) {
-				if(product.applyDiscount().compareTo(minimumPrice) >= 0 && product.applyDiscount().compareTo(maximumPrice) <= 0) {
-					filteredProducts.add(product);
-				}
-			} else {
-				if(product.getPrice().compareTo(minimumPrice) >= 0 && product.getPrice().compareTo(maximumPrice) <= 0) {
-					filteredProducts.add(product);
-				}
-			}
-		}
+
+		filteredProducts.addAll(
+			allProducts
+				.stream()
+				.filter(p -> p.compare(minimumPrice , maximumPrice))
+				.toList()
+		);
 
 		return filteredProducts;
 	}
